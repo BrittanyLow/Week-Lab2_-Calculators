@@ -23,10 +23,36 @@ public class ArithmeticCalculatorServlet extends HttpServlet
             throws ServletException, IOException 
     {
         
-//        switch(){
+    String firstStr = request.getParameter("one");
+    String secondStr = request.getParameter("two");
+    String operation = request.getParameter("operation");
+    
+    int result=0;
+    boolean calcPerformed=false;
+    
+    if (operation!=null)
+    {
+        if (firstStr!=null && secondStr!=null && !firstStr.equals("") && !secondStr.equals(""))
+        {
+            int first = Integer.parseInt(firstStr);
+            int second = Integer.parseInt(secondStr);
             
-                
-//        }
-        
+            char operationType = operation.charAt(0);
+            
+            switch (operationType)
+            {
+                case '+': result = first + second;
+                    break;
+                case '-': result = first - second;
+                    break;
+                case '*': result = first * second;
+                    break;
+                case '%': result = first % second;
+                    break;
+            }
+            
+            calcPerformed = true;
+    }
+    }
     }
 }
