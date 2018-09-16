@@ -1,5 +1,4 @@
 import java.io.IOException;
-import javafx.scene.AccessibleRole;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,44 +14,56 @@ public class ArithmeticCalculatorServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-                getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response); 
+        getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response); 
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        
-    String firstStr = request.getParameter("one");
-    String secondStr = request.getParameter("two");
-    String operation = request.getParameter("operation");
-    
-    int result=0;
-    boolean calcPerformed=false;
-    
-    if (operation!=null)
-    {
-        if (firstStr!=null && secondStr!=null && !firstStr.equals("") && !secondStr.equals(""))
+       String fNum = request.getParameter("nOne");
+       String sNum = request.getParameter("nTwo");
+       
+       request.setAttribute("nOne", fNum);
+       request.setAttribute("nTwo", sNum);
+       
+        try 
         {
-            int first = Integer.parseInt(firstStr);
-            int second = Integer.parseInt(secondStr);
+            int nOne = Integer.parseInt(fNum);
+            int nTwo = Integer.parseInt(sNum);
+            String result;
             
-            char operationType = operation.charAt(0);
-            
-            switch (operationType)
+            switch(request.getParameter("submit"))
             {
-                case '+': result = first + second;
+                case "+":
+                    result = "" + (nOne + nTwo);
                     break;
-                case '-': result = first - second;
+                case "-":
+                    result = "" + (nOne - nTwo);
+                    break;                   
+                case "*":
+                    result = "" + (nOne * nTwo);
                     break;
-                case '*': result = first * second;
+                case "%":
+                    result = "" + (nOne % nTwo);
                     break;
-                case '%': result = first % second;
+                default:
+                    result = "---";
                     break;
             }
-            
-            calcPerformed = true;
+        
+        request.setAttribute("result", result);
+        getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);         
+        
+        } 
+        catch (Exception e) 
+        {
+            request.setAttribute("result", "Invalid");  
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response); 
+
+        }
+                getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);          
     }
-    }
-    }
+        
+    
 }
