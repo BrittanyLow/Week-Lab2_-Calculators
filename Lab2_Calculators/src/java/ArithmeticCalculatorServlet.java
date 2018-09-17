@@ -27,7 +27,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet
        request.setAttribute("nOne", fNum);
        request.setAttribute("nTwo", sNum);
        
-        try 
+        try
         {
             int nOne = Integer.parseInt(fNum);
             int nTwo = Integer.parseInt(sNum);

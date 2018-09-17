@@ -17,7 +17,7 @@
             First: <input type="text" name="nOne" value="${nOne}"><br>
             Second: <input type="text" name="nTwo" value="${nTwo}"><br>
             <br>
-            <input type="submit" name="submit" value="+">
+            <input type="submit" name="submit" value="+"> 
             <input type="submit" name="submit" value="-">
             <input type="submit" name="submit" value="*">
             <input type="submit" name="submit" value="%">
