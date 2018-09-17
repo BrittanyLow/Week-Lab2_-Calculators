@@ -31,7 +31,7 @@ public class AgeCalculatorServlet extends HttpServlet
             request.setAttribute("message", "Your age next birthday will be " + nxAge);
             getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response); 
         }
-        catch (Exception e) 
+        catch (ExceptionInInitializerError e) 
         {
         request.setAttribute("message", "You must give your current age.");
         getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
